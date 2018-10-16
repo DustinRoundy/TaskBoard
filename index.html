@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Task Board</title>
+</head>
+<body>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <!--<li class="nav-item">-->
+        <!--<a class="nav-link active" id="current-list-name" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>-->
+    <!--</li>-->
+    <!--<li class="nav-item">-->
+        <!--<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>-->
+    <!--</li>-->
+    <!--<li class="nav-item">-->
+        <!--<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>-->
+    <!--</li>-->
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Options</a>
+        <div class="dropdown-menu">
+            <input type="text" placeholder="New List" onclick="this.select()"
+                   onKeyDown="if(event.keyCode==13) createNewList();" size="20" id="new-list-input">
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="nav0" role="tabpanel" aria-labelledby="home-tab">
+        <div class="card-columns">
+            <div class="card" style="">
+                <div class="card-body">
+                    <h5 class="card-title"><input class="title" placeholder="Task Title" type="text" style="border: none;"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><input class="subtitle" placeholder="Task Subtitle" type="text" style="border: none;"></h6>
+                    <p class="card-text"><textarea style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>
+                    <a href="#" onclick="addTask()" class="card-link text-success">Add Card</a>
+                    <!--<a href="#" class="card-link">Another link</a>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="nav1" role="tabpanel" aria-labelledby="profile-tab">... Profile</div>
+    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="contact-tab">...Contact</div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="scripts.js" defer></script>
+</body>
+</html>
