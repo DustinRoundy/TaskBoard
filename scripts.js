@@ -1,6 +1,8 @@
 let nextId = 0;
 let listi = 0;
 let list = [];
+let taski = 0;
+let curlist;
 $('.card-columns').sortable();
 
 
@@ -14,13 +16,21 @@ class List {
 
     }
 }
+class Task {
+    constructor(id, name, subtitle, text) {
+        this.id = id;
+        this.name = name;
+        this.subtitle = subtitle;
+        this.text = text;
+    }
+}
 
 
 function displayCurrentList(){
     let listString = '';
     for (let i = 0; i < list.length; i++){
         let listitem = list[i];
-        listString += `<li class="nav-item"><a class="nav-link" id="current-list-name" data-toggle="tab" href="#nav${listitem.id}" role="tab" aria-controls="home" aria-selected="true">${listitem.name}</a></li>`
+        listString += `<li class="nav-item" onclick="curlist=${listitem.id}"><a class="nav-link" id="current-list-name" data-toggle="tab" href="#nav${listitem.id}" role="tab" aria-controls="home" aria-selected="true">${listitem.name}</a></li>`
     }
     listString += `<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -57,3 +67,8 @@ function createNewList(){
     displayCurrentList();
 }
 
+function addTask(){
+    list[curlist].task[taski] = new Task(taski, document.getElementById('title').value, document.getElementById('subtitle').value, document.getElementById('text').value);
+    taski++;
+    console.log(list);
+}
