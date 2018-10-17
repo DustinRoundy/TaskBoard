@@ -20,7 +20,7 @@
     <!--<li class="nav-item">-->
         <!--<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>-->
     <!--</li>-->
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown d-flex justify-content-end">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Options</a>
         <div class="dropdown-menu">
             <input type="text" placeholder="New List" onclick="this.select()"
@@ -31,22 +31,22 @@
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade" id="nav0" role="tabpanel" aria-labelledby="home-tab">
-        <div class="card-columns">
-            <div class="card" style="">
-                <div class="card-body">
-                    <h5 class="card-title"><input id="title" placeholder="Task Title" type="text" style="border: none;"></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><input id="subtitle" placeholder="Task Subtitle" type="text" style="border: none;"></h6>
-                    <p class="card-text"><textarea id="text" style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>
-                    <a href="#" onclick="addTask()" class="card-link text-success">Add Card</a>
-                    <!--<a href="#" class="card-link">Another link</a>-->
-                </div>
-            </div>
-        </div>
+    <!--<div class="tab-pane fade" id="nav0" role="tabpanel" aria-labelledby="home-tab">-->
+        <!--<div class="card-columns">-->
+            <!--<div class="card" style="">-->
+                <!--<div class="card-body">-->
+                    <!--<h5 class="card-title"><input id="title" placeholder="Task Title" type="text" style="border: none;"></h5>-->
+                    <!--<h6 class="card-subtitle mb-2 text-muted"><input id="subtitle" placeholder="Task Subtitle" type="text" style="border: none;"></h6>-->
+                    <!--<p class="card-text"><textarea id="text" style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>-->
+                    <!--<a href="#" onclick="addTask()" class="card-link text-success">Add Card</a>-->
+                    <!--&lt;!&ndash;<a href="#" class="card-link">Another link</a>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
-    </div>
-    <div class="tab-pane fade" id="nav1" role="tabpanel" aria-labelledby="profile-tab">... Profile</div>
-    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="contact-tab">...Contact</div>
+    <!--</div>-->
+    <!--<div class="tab-pane fade" id="nav1" role="tabpanel" aria-labelledby="profile-tab">... Profile</div>-->
+    <!--<div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="contact-tab">...Contact</div>-->
 </div>
 
 <!-- Optional JavaScript -->
