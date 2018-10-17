@@ -7,8 +7,7 @@ $('.card-columns').sortable();
 
 
 class List {
-    constructor(id, name, task) {
-        this.id = id;
+    constructor(name, task) {
         this.name = name;
         this.task = task;
     }
@@ -17,8 +16,7 @@ class List {
     }
 }
 class Task {
-    constructor(id, name, subtitle, text, complete) {
-        this.id = id;
+    constructor(name, subtitle, text, complete) {
         this.name = name;
         this.subtitle = subtitle;
         this.text = text;
@@ -59,9 +57,10 @@ function displayCurrentList(){
 // displayCurrentList();
 
 function createNewList(){
-    list[listi] = new List(listi, document.getElementById('new-list-input').value, []);
+    list.push(new List(document.getElementById('new-list-input').value, []));
+    let listi = list.length - 1;
     $(`<li class="nav-item" onclick="curlist=${list[listi].id}"><a class="nav-link" id="current-list-name" data-toggle="tab" href="#nav${list[listi].id}" role="tab" aria-controls="home" aria-selected="true">${list[listi].name}</a>`).insertBefore(".dropdown");
-    $(".tab-content").append(`<div class="tab-pane fade" id="nav${list[listi].id}" role="tabpanel" aria-labelledby="profile-tab"><div class="card-columns col${list[listi].id}">
+    $(".tab-content").append(`<div class="tab-pane fade" id="nav${listi}" role="tabpanel" aria-labelledby="profile-tab"><div class="card-columns col${listi}">
             <div class="card" style="">
                 <div class="card-body">
                     <h5 class="card-title"><input id="title" placeholder="Task Title" type="text" style="border: none;"></h5>
@@ -84,7 +83,8 @@ function createNewList(){
 }
 
 function addTask(){
-    list[curlist].task[taski] = new Task(taski, document.getElementById('title').value, document.getElementById('subtitle').value, document.getElementById('text').value, false);
+    list[curlist].task.push(new Task(document.getElementById('title').value, document.getElementById('subtitle').value, document.getElementById('text').value, false));
+    let taski = list[curlist].task.length - 1;
 
     document.getElementById('title').value = '';
     document.getElementById('subtitle').value = '';
@@ -104,5 +104,5 @@ function addTask(){
 }
 
 function deleteTask(id){
-    
+
 }
