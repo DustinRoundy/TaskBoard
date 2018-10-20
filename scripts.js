@@ -9,6 +9,7 @@ class List {
     }
     delete(){
         lists.splice(curlist, 1);
+        Save();
         redrawLists();
     }
     addItem(){
@@ -17,14 +18,17 @@ class List {
         let text = $('#text' + curlist).val();
         let complete = false;
         this.task.push(new Task(name, text, complete));
+        Save();
         redrawLists();
     }
     completeItem(id){
         this.task[id].complete = true;
+        Save();
         redrawLists();
     }
     removeItem(id){
         this.task.splice(id, 1);
+        Save();
         redrawLists();
     }
 }
@@ -34,12 +38,9 @@ class Task {
         this.text = text;
         this.complete = complete;
     }
-    delete(id, task){
-        delete lists['method3'];
-        redrawLists();
-    }
-}
 
+}
+Load();
 
 function createNewList(){
     lists.push(new List($('#new-list-input').val(), []));
@@ -117,6 +118,24 @@ function redrawLists(){
 function Save(){
     let listString = JSON.stringify(lists);
     localStorage.setItem(0, listString);
+}
+function Load(){
+    if (localStorage.length == 0) {
+        console.log("none found");
+    }
+    else{
+        let list = JSON.parse(localStorage.getItem(0));
+        console.log(list);
+        for (let i = 0; i < list.length; i++){
+            name = list[i].name;
+            lists.push(new List(list[i].name, []));
+            for (let j = 0; j < list[i].task.length; j++){
+                lists[i].task.push(new Task(list[i].task[j].name, list[i].task[j].text, list[i].task[j].complete));
+            }
+        }
+        redrawLists();
+    }
+
 }
 
 // class List{
