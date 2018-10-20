@@ -1,5 +1,6 @@
 
 let lists = [];
+let curlist;
 
 class List {
     constructor(name,task){
@@ -7,14 +8,20 @@ class List {
         this.task = task;
     }
     delete(){
-        //delete list goes here
+        lists.splice(curlist, 1);
+        redrawLists();
     }
-    addItem(name, text, complete){
+    addItem(){
         //adding to list goes here
+        let name = $('#title' + curlist).val();
+        let text = $('#text' + curlist).val();
+        let complete = false;
         this.task.push(new Task(name, text, complete));
+        redrawLists();
     }
     removeItem(id){
-        this
+        this.task.splice(id, 1);
+        redrawLists();
     }
 }
 class Task {
@@ -24,12 +31,13 @@ class Task {
         this.complete = complete;
     }
     delete(id, task){
-        delete lists['method3']
+        delete lists['method3'];
         redrawLists();
     }
 }
 
 lists.push(new List('title', []));
+lists.push(new List('other list', []));
 lists[0].addItem('task', 'text', false);
 lists[0].addItem('task2', 'text2', false);
 redrawLists();
@@ -43,27 +51,42 @@ function redrawLists(){
     $('#myTab').html('');
     $('#myTabContent').html('');
     for (let i = 0; i < lists.length; i++){
-        let numList = i;
-        $("#myTab").append(`<li class="nav-item"><a class="nav-link" id="home-tab" data-toggle="tab" href="#${"nav" + i}" role="tab" aria-controls="home" aria-selected="true">${lists[i].name}</a></li>`);
-        $('#myTabContent').append(`<div class="tab-pane fade" id="nav${i}" role="tabpanel" aria-labelledby="profile-tab"></div>`);
-        $('#nav' + i).append(`<div class="card-columns col${i}">
+        if (curlist === i){
+            $("#myTab").append(`<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#${"nav" + i}" role="tab" aria-controls="home" aria-selected="true" onclick="curlist=${i}">${lists[i].name}</a></li>`);
+            $('#myTabContent').append(`<div class="tab-pane fade show active" id="nav${i}" role="tabpanel" aria-labelledby="profile-tab"></div>`);
+            $('#nav' + i).append(`<div class="card-columns col${i}">
              <div class="card" style="">
                  <div class="card-body">
-                     <h5 class="card-title"><input id="title" placeholder="Task Title" type="text" style="border: none;"></h5>
-                     <h6 class="card-subtitle mb-2 text-muted"><input id="subtitle" placeholder="Task Subtitle" type="text" style="border: none;"></h6>
-                     <p class="card-text"><textarea id="text" style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>
-                     <a href="#" onclick="addTask()" class="card-link text-success">Add Card</a>
+                     <h5 class="card-title"><input id="title${i}" placeholder="Task Title" type="text" style="border: none;"></h5>
+                     <h6 class="card-subtitle mb-2 text-muted"><input id="subtitle${i}" placeholder="Task Subtitle" type="text" style="border: none;"></h6>
+                     <p class="card-text"><textarea id="text${i}" style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>
+                     <a href="#" onclick="lists[${i}].addItem()" class="card-link text-success">Add Card</a>
                      <!--<a href="#" class="card-link">Another link</a>-->
                  </div>
              </div>
          </div>`);
+        }else {
+            $("#myTab").append(`<li class="nav-item"><a class="nav-link" id="home-tab" data-toggle="tab" href="#${"nav" + i}" role="tab" aria-controls="home" aria-selected="true" onclick="curlist=${i}">${lists[i].name}</a></li>`);
+            $('#myTabContent').append(`<div class="tab-pane fade" id="nav${i}" role="tabpanel" aria-labelledby="profile-tab"></div>`);
+            $('#nav' + i).append(`<div class="card-columns col${i}">
+             <div class="card" style="">
+                 <div class="card-body">
+                     <h5 class="card-title"><input id="title${i}" placeholder="Task Title" type="text" style="border: none;"></h5>
+                     <h6 class="card-subtitle mb-2 text-muted"><input id="subtitle${i}" placeholder="Task Subtitle" type="text" style="border: none;"></h6>
+                     <p class="card-text"><textarea id="text${i}" style="width: 100%; border: none;" placeholder="This is the Tasks Text. Put any information you need here."></textarea></p>
+                     <a href="#" onclick="lists[${i}].addItem()" class="card-link text-success">Add Card</a>
+                     <!--<a href="#" class="card-link">Another link</a>-->
+                 </div>
+             </div>
+         </div>`);
+        }
         for(let j = 0; j < lists[i].task.length; j++){
             $('.col' + i).append(`<div class="card" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
                      <p class="card-text">${lists[i].task[j].text}</p>
-                     <a href="#" onclick="lists[${i}].task[${j}].delete()" class="card-link text-success">Complete</a>
-                     <a href="#" onclick="deleteTask(${j})" class="card-link text-danger">Delete</a>
+                     <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-success">Complete</a>
+                     <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-danger">Delete</a>
                  </div>
              </div>`);
         }
@@ -74,7 +97,7 @@ function redrawLists(){
              <input type="text" placeholder="New List" onclick="this.select()"
                     onKeyDown="if(event.keyCode==13) createNewList();" size="20" id="new-list-input">
              <div class="dropdown-divider"></div>
-             <a class="dropdown-item text-danger" href="#" onclick="deleteList(curlist)">Delete List</a>
+             <a class="dropdown-item text-danger" href="#" onclick="lists[curlist].delete()">Delete List</a>
          </div>
      </li>`)
 }
@@ -102,7 +125,7 @@ function redrawLists(){
 //
 //
 //     $(".sideContainer").append("<div class='row' >" +
-//         "<span class='sideListName' onclick='displayList(id)' contenteditable='true'>" + listArray[id].name +
+//         "<span class='sideListName' onclick='displayList(" + id + ")' contenteditable='true'>" + listArray[id].name +
 //         "</span></div>");
 //     $(".listName").val("");
 //     //
@@ -121,8 +144,8 @@ function redrawLists(){
 //
 // }
 //
-// function displayList(newlist){
-//     //console.log("newlist name" + newList);
+// function displayList(x){
+//     console.log("newlist name" + x);
 //     $(".mainContainer").append("<div class='listContainer'>" +
 //         "<div class='listTitle'>" + "To Do List" + "</div>" +
 //         "<div class='taskContainer'>" + "</div>" +

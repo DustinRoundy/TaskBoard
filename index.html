@@ -26,7 +26,7 @@
             <input type="text" placeholder="New List" onclick="this.select()"
                    onKeyDown="if(event.keyCode==13) createNewList(event);" size="20" id="new-list-input">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#" onclick="deleteList(curlist)">Delete List</a>
+            <a class="dropdown-item text-danger" href="#" onclick="lists.delete(curlist)">Delete List</a>
         </div>
     </li>
 </ul>
