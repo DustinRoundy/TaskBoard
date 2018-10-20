@@ -24,9 +24,9 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Options</a>
         <div class="dropdown-menu">
             <input type="text" placeholder="New List" onclick="this.select()"
-                   onKeyDown="if(event.keyCode==13) createNewList();" size="20" id="new-list-input">
+                   onKeyDown="if(event.keyCode==13) createNewList(event);" size="20" id="new-list-input">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item text-danger" href="#" onclick="deleteList(curlist)">Delete List</a>
         </div>
     </li>
 </ul>
@@ -45,7 +45,7 @@
         <!--</div>-->
 
     <!--</div>-->
-    <!--<div class="tab-pane fade" id="nav1" role="tabpanel" aria-labelledby="profile-tab">... Profile</div>-->
+    <!--<div class="tab-pane fade" id="nav0" role="tabpanel" aria-labelledby="profile-tab">... Profile</div>-->
     <!--<div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="contact-tab">...Contact</div>-->
 </div>
 
