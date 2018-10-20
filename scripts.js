@@ -19,6 +19,10 @@ class List {
         this.task.push(new Task(name, text, complete));
         redrawLists();
     }
+    completeItem(id){
+        this.task[id].complete = true;
+        redrawLists();
+    }
     removeItem(id){
         this.task.splice(id, 1);
         redrawLists();
@@ -36,11 +40,7 @@ class Task {
     }
 }
 
-lists.push(new List('title', []));
-lists.push(new List('other list', []));
-lists[0].addItem('task', 'text', false);
-lists[0].addItem('task2', 'text2', false);
-redrawLists();
+
 function createNewList(){
     lists.push(new List($('#new-list-input').val(), []));
     $('#new-list-input').val('');
@@ -81,14 +81,26 @@ function redrawLists(){
          </div>`);
         }
         for(let j = 0; j < lists[i].task.length; j++){
-            $('.col' + i).append(`<div class="card" style="">
+            if (lists[i].task[j].complete === true){
+                $('.col' + i).append(`<div class="card border-success text-secondary" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
                      <p class="card-text">${lists[i].task[j].text}</p>
-                     <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-success">Complete</a>
+                     
                      <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-danger">Delete</a>
                  </div>
              </div>`);
+            }
+            else{
+                $('.col' + i).append(`<div class="card" style="">
+                 <div class="card-body">
+                     <h5 class="card-title">${lists[i].task[j].name}</h5>
+                     <p class="card-text">${lists[i].task[j].text}</p>
+                     <a href="#" onclick="lists[${i}].completeItem(${j})" class="card-link text-success">Complete</a>
+                     <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-danger">Delete</a>
+                 </div>
+             </div>`);
+            }
         }
     }
     $('#myTab').append(`<li class="nav-item dropdown d-flex justify-content-end">
@@ -100,6 +112,11 @@ function redrawLists(){
              <a class="dropdown-item text-danger" href="#" onclick="lists[curlist].delete()">Delete List</a>
          </div>
      </li>`)
+}
+
+function Save(){
+    let listString = JSON.stringify(lists);
+    localStorage.setItem(0, listString);
 }
 
 // class List{
