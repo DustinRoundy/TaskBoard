@@ -28,8 +28,13 @@ class List {
     }
     removeItem(id){
         this.task.splice(id, 1);
-        Save();
-        redrawLists();
+        $('#card' + id).animate({
+            opacity: 0
+        }, 800, function(){
+            //when animation is done
+            Save();
+            redrawLists();
+        });
     }
 }
 class Task {
@@ -81,9 +86,10 @@ function redrawLists(){
              </div>
          </div>`);
         }
+        $( ".card-columns" ).sortable();
         for(let j = 0; j < lists[i].task.length; j++){
             if (lists[i].task[j].complete === true){
-                $('.col' + i).append(`<div class="card border-success text-secondary" style="">
+                $('.col' + i).append(`<div class="card border-success text-secondary" id="card${j}" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
                      <p class="card-text">${lists[i].task[j].text}</p>
@@ -93,7 +99,7 @@ function redrawLists(){
              </div>`);
             }
             else{
-                $('.col' + i).append(`<div class="card" style="">
+                $('.col' + i).append(`<div class="card" id="card${j}" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
                      <p class="card-text">${lists[i].task[j].text}</p>
@@ -137,94 +143,3 @@ function Load(){
     }
 
 }
-
-// class List{
-//     constructor(name, tasks, done){
-//         this.name = name;
-//         this.tasks = tasks;
-//         this.done = done;
-//     }
-//
-// }
-// let listArray = [];
-// let currentList;
-//
-// function createListObject(){
-//     listArray.push(new List($("listName").val(), [], false));
-//     let id = listArray.length - 1;
-//     currentList = id;
-//     // let newList = new List(id, $(".listName").val());
-//     // nextId++;
-//     // addListArray(newList);
-//     //
-//     // currentList = newList.id;
-//
-//
-//     $(".sideContainer").append("<div class='row' >" +
-//         "<span class='sideListName' onclick='displayList(" + id + ")' contenteditable='true'>" + listArray[id].name +
-//         "</span></div>");
-//     $(".listName").val("");
-//     //
-//     // let idName = 'listIdName';
-//     // console.log("attrb id is " + $(this).id);
-//     // console.log(nextId + ": "  + listArray[listArray.length -1].name);
-// }
-//
-// function addListArray(list) {
-//     listArray.push(list);
-//     console.log(listArray.length);
-//     console.log(list.name);
-// }
-//
-// function findId(list) {
-//
-// }
-//
-// function displayList(x){
-//     console.log("newlist name" + x);
-//     $(".mainContainer").append("<div class='listContainer'>" +
-//         "<div class='listTitle'>" + "To Do List" + "</div>" +
-//         "<div class='taskContainer'>" + "</div>" +
-//         //"<div class='taskList'>" +
-//         //     "<div>" + "<i class='far fa-square'>" + "</i>" + "Name of Task Here"+ "</div>" +
-//         //     "<i class='trashCan far fa-trash-alt'>" + "</i>"+
-//         // "</div>" + "</div>" +
-//         "<div class='listFooter'>" +
-//         "<button class='taskButton' onclick='addTask()'>" + "New Task" + "</button>" + "</div>");
-//
-//     $('.myInput').val("");
-//     $('.trashCan').click(function(){ +
-//         $(this).parent().parent().animate({
-//             opacity: 0,
-//             left: '+=200'
-//         }, 800, function() {
-//             $(this).remove();
-//         });
-//     });
-//
-//     for(let j = 0; j < listArray.length; j++){
-//         console.log(" from displayList: " + listArray[j].name + " and ");
-//     }
-// }
-//
-// function addTask() {
-// // $(".taskContainer").append("<div class='taskList'>" + 'Hello' +
-// //     "<div>" + "<i class='trashCan far fa-trash-alt'>" + "</i>" +
-// //     "<i class='far fa-square'>" + "</i>" + "</div>" + "</div>");
-//
-//     $(".taskContainer").append("<div class='taskList'>" +
-//         "<div class='checkboxName'>" + "<i class='far fa-square'>" + "</i>" + "Name of Task Here"+ "</div>" +
-//         "<i class='trashCan far fa-trash-alt'>" + "</i>"+
-//         "</div>");
-//
-//     $('.myInput').val("");
-//     $('.trashCan').click(function(){
-//         $(this).parent().parent().animate({
-//             opacity: 0,
-//             left: '+=200'
-//         }, 800, function() {
-//             $(this).remove();
-//         });
-//     });
-// }
-
