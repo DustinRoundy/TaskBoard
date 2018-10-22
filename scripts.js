@@ -15,9 +15,10 @@ class List {
     addItem(){
         //adding to list goes here
         let name = $('#title' + curlist).val();
+        let subtitle = $('#subtitle' + curlist).val();
         let text = $('#text' + curlist).val();
         let complete = false;
-        this.task.push(new Task(name, text, complete));
+        this.task.push(new Task(name, subtitle, text, complete));
         Save();
         redrawLists();
     }
@@ -38,8 +39,9 @@ class List {
     }
 }
 class Task {
-    constructor(name, text, complete){
+    constructor(name, subtitle, text, complete){
         this.name = name;
+        this.subtitle = subtitle;
         this.text = text;
         this.complete = complete;
     }
@@ -92,6 +94,7 @@ function redrawLists(){
                 $('.col' + i).append(`<div class="card border-success text-secondary" id="card${j}" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">${lists[i].task[j].subtitle}</h6>
                      <p class="card-text">${lists[i].task[j].text}</p>
                      
                      <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-danger">Delete</a>
@@ -102,6 +105,7 @@ function redrawLists(){
                 $('.col' + i).append(`<div class="card" id="card${j}" style="">
                  <div class="card-body">
                      <h5 class="card-title">${lists[i].task[j].name}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">${lists[i].task[j].subtitle}</h6>
                      <p class="card-text">${lists[i].task[j].text}</p>
                      <a href="#" onclick="lists[${i}].completeItem(${j})" class="card-link text-success">Complete</a>
                      <a href="#" onclick="lists[${i}].removeItem(${j})" class="card-link text-danger">Delete</a>
